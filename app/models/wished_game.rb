@@ -1,0 +1,2 @@
+class WishedGame < ApplicationRecord
+end
