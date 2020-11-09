@@ -1,0 +1,2 @@
+class OwnedGame < ApplicationRecord
+end
