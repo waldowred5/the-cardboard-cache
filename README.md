@@ -15,7 +15,7 @@ In addition to these platform specific issues, the second hand board game market
 
 ### **R8 - Why does it need solving?**
 
-What if there was a way to buy, sell or swap board games, for free, with other board game enthusiasts without having to pay any additional shipping?
+What if there was a way to trade board games, for free, with other board game enthusiasts without having to pay any additional shipping?
 
 **This would allow all of the abandoned board games to finally get back to the tabletop, as originally intended by their creators.**
 
@@ -58,11 +58,38 @@ A key strategy for this approach would be to focus on board game trades between 
     - User B has Game B on their wishlist and Game A in their collection available for trade with a recommended price of $50
     - User A would be given a suggestion with a list of the other games User B had in their trade list to try and balance the final trade amount
 - Users should be able to set their preference for buying new games or trading existing games (to tailer whether they see more sales vs trades)
-- Users should be able to see a list of popular games they might want to add to their wishlist (index page - top rated board games)
+- Users should be able to see a list of popular and new games they might want to add to their wishlist (index page - top rated board games + new board games)
+- Users should be given suggestions for local board game stores (or other suitable locations) to complete board game trades (benefit, stores may be able to use board game trades as opportunities to upsell users, and users can buy any accessories/expansions they may want for their new game)
+- If a user enters a game into their wishlist that is already in their collection they will be prompted of this and asked if they wish to move this game from their collection to their wishlist (and vice versa)
 
 <br>
 
 ### **R14 - ERD:**
+
+**Users:** 
+
+**Addresses:** 
+
+**Board Games:**
+- Categories (Thing)
+- Publisher (Thing)
+- Designer (Thing)
+- Overall rank
+- Avg. rating
+- Name
+- Year Published
+- Min/Max Players
+- Min/Max Playing time
+- Age
+- Complexity
+
+**Wishlists:**
+
+**Collections:**
+
+**Trades:**
+
+**Messages:**
 
 <br>
 
@@ -74,7 +101,46 @@ A key strategy for this approach would be to focus on board game trades between 
 
 <br>
 
-### **R17 - Models:**
+### **<a name="txt17.1">R17</a> - Models:**
+
+" Rails supports six types of associations:
+- belongs_to
+- has_one
+- has_many
+- has_many :through
+- has_one :through
+- has_and_belongs_to_many "
+
+*Sourced from [[17.1.1]](#ref17.1.1)*
+
+**List of all models:**
+
+| | |
+--- | ---
+**Users** | Board game enthusiasts
+**Addresses** | Physical address of a user
+**Address Table Dependencies** | Cities, States, Countries
+**Board Games** | Library of all board games
+**Board Game Table Dependencies** | Publishers, Designers, Categories, Accessories
+**Wishlists** | Lists of all board games a user wishes to acquire
+**Collections** | Lists of all board games a user owns
+**Trades** | Transactions between users trading games with each other
+**Matches** | A list of all board game matches between wishlists and collections from different users
+**Messages** | Users can message each other
+
+<br>
+
+Relationships:
+- A User `has_one` Address, an Address `belongs_to` a user
+- A User `has_many` Board Games `:through` Wishlists
+- A User `has_many` Board Games `:through` Collections
+- A User `has_one` Wishlist, a Wishlist `belongs_to` a user
+- A User `has_one` Collection, a Collection `belongs_to` a user
+
+- A User `has_many` Trades, a Trade
+
+
+
 
 <br>
 
@@ -89,3 +155,21 @@ A key strategy for this approach would be to focus on board game trades between 
 ### **R20 - Task Management:**
 
 <br>
+
+<br>
+
+<br>
+
+### *References:*
+
+[^](#txt17.1)<a name="ref17.1.1">17.1.1 - </a>Rails Guides. 2012. Active Record Associations. [ONLINE] Available at: [Link](https://guides.rubyonrails.org/association_basics.html). [Accessed 6 November 2020].
+
+<br>
+
+Notes:
+
+[^](#txtX.1)<a name="refX.1.X">X.1.X - </a>WebsiteName. Year. WebPageTitle. [ONLINE] Available at: [Link](). [Accessed 6 November 2020].
+
+<a name="txt11.1">Question 11</a>
+
+*References: [[11.1.1]](#ref11.1.1), [[11.1.2]](#ref11.1.2), [[11.1.3]](#ref11.1.3)*
