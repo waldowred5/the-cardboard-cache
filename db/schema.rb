@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_005227) do
+ActiveRecord::Schema.define(version: 2020_11_10_010824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_005227) do
   create_table "images", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "owned_game_id"
+    t.bigint "owned_game_id", null: false
     t.text "image_url"
     t.index ["owned_game_id"], name: "index_images_on_owned_game_id"
   end
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 2020_11_10_005227) do
   create_table "owned_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "trader_id"
-    t.bigint "board_game_id"
+    t.bigint "trader_id", null: false
+    t.bigint "board_game_id", null: false
     t.integer "priority"
     t.integer "trade_status"
     t.decimal "price"
@@ -87,8 +87,8 @@ ActiveRecord::Schema.define(version: 2020_11_10_005227) do
   create_table "wished_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "wishlister_id"
-    t.bigint "board_game_id"
+    t.bigint "wishlister_id", null: false
+    t.bigint "board_game_id", null: false
     t.integer "priority"
     t.index ["board_game_id"], name: "index_wished_games_on_board_game_id"
     t.index ["wishlister_id"], name: "index_wished_games_on_wishlister_id"
