@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_231336) do
+ActiveRecord::Schema.define(version: 2020_11_10_010824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,21 +18,55 @@ ActiveRecord::Schema.define(version: 2020_11_09_231336) do
   create_table "addresses", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.text "street_1"
+    t.text "street_2"
+    t.text "post_code"
+    t.text "city"
+    t.text "state"
+    t.text "country"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "board_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "name"
+    t.integer "year_published"
+    t.text "short_description"
+    t.integer "overall_rank"
+    t.float "geek_rating"
+    t.text "designer"
+    t.text "publisher"
+    t.integer "min_players"
+    t.integer "max_players"
+    t.integer "min_playing_time"
+    t.integer "max_playing_time"
+    t.integer "age"
+    t.float "weight"
+    t.text "long_description"
+    t.text "publisher_website"
   end
 
   create_table "images", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "owned_game_id", null: false
+    t.text "image_url"
+    t.index ["owned_game_id"], name: "index_images_on_owned_game_id"
   end
 
   create_table "owned_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "trader_id", null: false
+    t.bigint "board_game_id", null: false
+    t.integer "priority"
+    t.integer "trade_status"
+    t.decimal "price"
+    t.integer "condition"
+    t.index ["board_game_id"], name: "index_owned_games_on_board_game_id"
+    t.index ["trader_id"], name: "index_owned_games_on_trader_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,6 +87,17 @@ ActiveRecord::Schema.define(version: 2020_11_09_231336) do
   create_table "wished_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "wishlister_id", null: false
+    t.bigint "board_game_id", null: false
+    t.integer "priority"
+    t.index ["board_game_id"], name: "index_wished_games_on_board_game_id"
+    t.index ["wishlister_id"], name: "index_wished_games_on_wishlister_id"
   end
 
+  add_foreign_key "addresses", "users"
+  add_foreign_key "images", "owned_games"
+  add_foreign_key "owned_games", "board_games"
+  add_foreign_key "owned_games", "users", column: "trader_id"
+  add_foreign_key "wished_games", "board_games"
+  add_foreign_key "wished_games", "users", column: "wishlister_id"
 end
