@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :trades
   resources :board_games
   resources :images
   resources :owned_games
