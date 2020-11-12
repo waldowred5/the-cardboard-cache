@@ -1,5 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<%= @board_game.name %>
-<%= link_to 'Edit', edit_board_game_path(@board_game) %> |
-<%= link_to 'Back', board_games_path %>
+<div class='board-game-page'>
+    <div class='board-game-rank-rating'>
+        <%= "#{@board_game.overall_rank}" %>
+        <h3>Rank</h3>
+        <%= "#{@board_game.geek_rating}" %>
+        <h3>Rating</h3>
+    </div>
+    <div class='board-game-info'>
+        <h1><%= "#{@board_game.name} (#{@board_game.year_published})" %></h1>
+        <div class='board-game-play-stats'>
+            <%= "Players: #{@board_game.min_players} - #{@board_game.max_players}" %>
+            <%= "Age: #{@board_game.age}+" %>
+            <%= "Playing Time: #{@board_game.min_playing_time} - #{@board_game.max_playing_time}" %>
+            <%= "Weight: #{@board_game.weight}/5" %>
+        </div>
+    </div>
+    <div class='board-game-image-container'>
+        <%= image_tag(@board_game.image, class: "board-game-image", alt: "#{@board_game.name} Front Cover") %>
+    </div>
+    <div class='board-game-description'>
+        <%= @board_game.long_description %>
+    </div>
+</div>
