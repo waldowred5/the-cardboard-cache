@@ -1,24 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Board Games</h1>
+<h1>Top Board Games</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @board_games.each do |board_game| %>
-      <tr>
-        <td><%= "#{board_game.overall_rank}" %></td>
-        <td><%= "#{board_game.name}" %></td>
-        <td><%= "#{board_game.year_published}" %></td>
-        <td><%= "#{board_game.geek_rating}" %></td>
-        <td><%= link_to 'Show', board_game %></td>
-        <td><%= link_to 'Destroy', board_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'bg_tile' %>

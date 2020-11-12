@@ -1,0 +1,24 @@
+<div class='tiles-container'>
+    <% @board_games.each do |board_game| %>
+        <div class='board-game-tile'>
+            <%= link_to image_tag(board_game.image, class: "card-image", alt: "#{board_game.name} Front Cover"), board_game %>
+            <div class='board-game-stats'>
+                <div class='board-game-name'>
+                    <h2><%= "#{board_game.name} (#{board_game.year_published})" %></h2>
+                </div>
+                <div class='board-game-rank-buttons-container'>
+                    <div class='board-game-rank-rating'>
+                        <%= "#{board_game.overall_rank}" %>
+                        <h3>Rank</h3>
+                        <%= "#{board_game.geek_rating}" %>
+                        <h3>Rating</h3>
+                    </div>
+                    <div class='board-game-buttons'>
+                        <%= link_to 'Add to Wishlist', wished_games_path %>
+                        <%= link_to 'Add to Collection', owned_games_path %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
