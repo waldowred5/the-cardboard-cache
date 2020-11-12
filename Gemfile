@@ -26,6 +26,11 @@ gem 'devise'
 # Use CSS framework
 gem 'bootstrap'
 
+# APIs
+# Board Game Geek
+gem 'httparty'
+gem 'xml-simple'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
