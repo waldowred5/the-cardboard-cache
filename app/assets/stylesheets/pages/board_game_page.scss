@@ -1,0 +1,44 @@
+@mixin flex-row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.tiles-container {
+    @include flex-row;
+    .board-game-tile {
+        @include flex-row;
+        background-color: lightgray;
+        width: 50vw;
+        height: 25vw;
+        a {
+            .card-image {
+                width: 25vw;
+                height: 25vw;
+                object-fit: cover;
+            }
+        }
+        .board-game-stats {
+            width: 25vw;
+            height: 25vw;
+            .board-game-name {
+                text-align: center;
+            }
+            .board-game-rank-buttons-container {
+                padding: 2vw;
+                @include flex-row;
+                justify-content: space-between;
+                .board-game-buttons {
+                    @include flex-column;
+                    justify-content: flex-end;
+                    align-items: center;
+
+                }
+            }
+        }
+    }
+}
