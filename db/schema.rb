@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_223345) do
+ActiveRecord::Schema.define(version: 2020_11_12_035216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,11 +33,8 @@ ActiveRecord::Schema.define(version: 2020_11_10_223345) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "name"
     t.integer "year_published"
-    t.text "short_description"
     t.integer "overall_rank"
     t.float "geek_rating"
-    t.text "designer"
-    t.text "publisher"
     t.integer "min_players"
     t.integer "max_players"
     t.integer "min_playing_time"
@@ -45,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_223345) do
     t.integer "age"
     t.float "weight"
     t.text "long_description"
-    t.text "publisher_website"
+    t.text "image"
   end
 
   create_table "images", force: :cascade do |t|
