@@ -8,37 +8,23 @@
     flex-flow: column wrap;
 }
 
-.tiles-container {
+.board-game-page {
     @include flex-row;
-    .board-game-tile {
-        @include flex-row;
-        background-color: lightgray;
-        width: 50vw;
-        height: 25vw;
-        a {
-            .card-image {
-                width: 25vw;
-                height: 25vw;
-                object-fit: cover;
-            }
+    justify-content: space-around;
+    padding-top: 2vw;
+    .board-game-rank-rating {
+    }
+    .board-game-info {
+        .board-game-play-stats {
+            @include flex-column;
         }
-        .board-game-stats {
-            width: 25vw;
+    }
+    .board-game-image-container {
+        .board-game-image {
             height: 25vw;
-            .board-game-name {
-                text-align: center;
-            }
-            .board-game-rank-buttons-container {
-                padding: 2vw;
-                @include flex-row;
-                justify-content: space-between;
-                .board-game-buttons {
-                    @include flex-column;
-                    justify-content: flex-end;
-                    align-items: center;
-
-                }
-            }
         }
+    }
+    .board-game-description {
+        p { padding: 2vw; }
     }
 }
