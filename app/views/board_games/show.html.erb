@@ -8,16 +8,16 @@
     <div class='board-game-info'>
         <h1><%= "#{@board_game.name} (#{@board_game.year_published})" %></h1>
         <div class='board-game-play-stats'>
-            <%= "Players: #{@board_game.min_players} - #{@board_game.max_players}" %>
-            <%= "Age: #{@board_game.age}+" %>
-            <%= "Playing Time: #{@board_game.min_playing_time} - #{@board_game.max_playing_time}" %>
-            <%= "Weight: #{@board_game.weight}/5" %>
+            <p><%= "Players: #{@board_game.min_players} - #{@board_game.max_players}" %></p>
+            <p><%= "Age: #{@board_game.age}+" %></p>
+            <p><%= "Playing Time: #{@board_game.min_playing_time} - #{@board_game.max_playing_time}" %></p>
+            <p><%= "Weight: #{@board_game.weight}/5" %></p>
         </div>
     </div>
     <div class='board-game-image-container'>
         <%= image_tag(@board_game.image, class: "board-game-image", alt: "#{@board_game.name} Front Cover") %>
     </div>
     <div class='board-game-description'>
-        <%= @board_game.long_description %>
+        <p><%= @board_game.long_description %></p>
     </div>
 </div>
