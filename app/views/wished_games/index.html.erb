@@ -1,26 +1,3 @@
-<p id="notice"><%= notice %></p>
+<h1>My Wishlist</h1>
 
-<h1>Wished Games</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @wished_games.each do |wished_game| %>
-      <tr>
-        <td><%= wished_game.id %></td>
-        <td><%= link_to 'Show', wished_game %></td>
-        <td><%= link_to 'Edit', edit_wished_game_path(wished_game) %></td>
-        <td><%= link_to 'Destroy', wished_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Wished Game', new_wished_game_path %>
+<%= render 'wg_tile' %>
