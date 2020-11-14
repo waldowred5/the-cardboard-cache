@@ -56,14 +56,14 @@ ActiveRecord::Schema.define(version: 2020_11_12_035216) do
   create_table "owned_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "trader_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "board_game_id", null: false
     t.integer "priority"
     t.integer "trade_status"
     t.decimal "price"
     t.integer "condition"
     t.index ["board_game_id"], name: "index_owned_games_on_board_game_id"
-    t.index ["trader_id"], name: "index_owned_games_on_trader_id"
+    t.index ["user_id"], name: "index_owned_games_on_user_id"
   end
 
   create_table "trades", force: :cascade do |t|
@@ -101,21 +101,21 @@ ActiveRecord::Schema.define(version: 2020_11_12_035216) do
   create_table "wished_games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "wishlister_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "board_game_id", null: false
     t.integer "priority"
     t.index ["board_game_id"], name: "index_wished_games_on_board_game_id"
-    t.index ["wishlister_id"], name: "index_wished_games_on_wishlister_id"
+    t.index ["user_id"], name: "index_wished_games_on_user_id"
   end
 
   add_foreign_key "addresses", "users"
   add_foreign_key "images", "owned_games"
   add_foreign_key "owned_games", "board_games"
-  add_foreign_key "owned_games", "users", column: "trader_id"
+  add_foreign_key "owned_games", "users"
   add_foreign_key "trades", "board_games", column: "requestee_board_game_id"
   add_foreign_key "trades", "board_games", column: "requestor_board_game_id"
   add_foreign_key "trades", "users", column: "requestee_id"
   add_foreign_key "trades", "users", column: "requestor_id"
   add_foreign_key "wished_games", "board_games"
-  add_foreign_key "wished_games", "users", column: "wishlister_id"
+  add_foreign_key "wished_games", "users"
 end

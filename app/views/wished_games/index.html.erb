@@ -12,6 +12,7 @@
   <tbody>
     <% @wished_games.each do |wished_game| %>
       <tr>
+        <td><%= wished_game.id %></td>
         <td><%= link_to 'Show', wished_game %></td>
         <td><%= link_to 'Edit', edit_wished_game_path(wished_game) %></td>
         <td><%= link_to 'Destroy', wished_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
