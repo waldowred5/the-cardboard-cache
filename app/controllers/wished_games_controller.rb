@@ -1,10 +1,10 @@
 class WishedGamesController < ApplicationController
   before_action :set_wished_game, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /wished_games
   # GET /wished_games.json
   def index
-    @wished_games = WishedGame.all
+    @wished_games = current_user.wishlist_items
   end
 
   # GET /wished_games/1
@@ -24,17 +24,22 @@ class WishedGamesController < ApplicationController
   # POST /wished_games
   # POST /wished_games.json
   def create
-    @wished_game = WishedGame.new(wished_game_params)
+    selected_board_game = BoardGame.find(params[:id])
+    current_user.wishlist_items << selected_board_game
 
-    respond_to do |format|
-      if @wished_game.save
-        format.html { redirect_to @wished_game, notice: 'Wished game was successfully created.' }
-        format.json { render :show, status: :created, location: @wished_game }
-      else
-        format.html { render :new }
-        format.json { render json: @wished_game.errors, status: :unprocessable_entity }
-      end
-    end
+    puts current_user.wishlist_item_ids
+
+    redirect_to wished_games_path
+
+  #   respond_to do |format|
+  #     if @wished_game.save
+  #       format.html { redirect_to @wished_game, notice: 'Wished game was successfully created.' }
+  #       format.json { render :show, status: :created, location: @wished_game }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @wished_game.errors, status: :unprocessable_entity }
+  #     end
+  #   end
   end
 
   # PATCH/PUT /wished_games/1
@@ -69,6 +74,6 @@ class WishedGamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def wished_game_params
-      params.fetch(:wished_game, {})
+      params.permit(:wishlister_id, :board_game_id)
     end
 end

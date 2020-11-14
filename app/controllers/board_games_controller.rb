@@ -4,7 +4,7 @@ class BoardGamesController < ApplicationController
   # GET /board_games
   # GET /board_games.json
   def index
-    @board_games = BoardGame.all
+    @board_games = BoardGame.all.ordered_by_rank
   end
 
   # GET /board_games/1
