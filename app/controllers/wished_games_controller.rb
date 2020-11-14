@@ -4,7 +4,7 @@ class WishedGamesController < ApplicationController
   # GET /wished_games
   # GET /wished_games.json
   def index
-    @wished_games = current_user.wishlist_items
+    @wished_games = current_user.wished_games
   end
 
   # GET /wished_games/1

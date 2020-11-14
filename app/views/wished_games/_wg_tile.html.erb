@@ -1,0 +1,14 @@
+<div class='tiles-container'>
+    <% @wished_games.each do |wished_game| %>
+        <div class='wished-game-tile'>
+            <div class='wished-game-name'>
+                <h2><%= "#{wished_game.board_game.name}" %></h2>
+            </div>
+            <%= link_to image_tag(wished_game.board_game.image, class: "card-image", alt: "#{wished_game.board_game.name} Front Cover"), wished_game.board_game %>
+            <div class='wished-game-buttons'>
+                <%= link_to 'Remove from Wishlist *Fix*', wished_games_path %>
+                <%= link_to 'Move to Collection *Fix*', owned_games_path %>
+            </div>
+        </div>
+    <% end %>
+</div>
