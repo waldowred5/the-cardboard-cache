@@ -1,3 +1,6 @@
 <h1>My Wishlist</h1>
-
-<%= render 'wg_tile' %>
+<% if @wished_games.empty? %>
+    <p>You have no games in your wishlist</p>
+<% else %>
+    <%= render 'wg_tile' %>
+<% end %>

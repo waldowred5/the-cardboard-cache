@@ -13,7 +13,7 @@
             <p><%= "Playing Time: #{@board_game.min_playing_time} - #{@board_game.max_playing_time}" %></p>
             <p><%= "Weight: #{@board_game.weight}/5" %></p>
             <p><%= link_to 'Add to Wishlist', create_wished_game_path(@board_game), method: :post %></p>
-            <p><%= link_to 'Add to Collection', new_owned_game_path %></p>
+            <p><%= link_to 'Add to Collection', create_owned_game_path(@board_game), method: :post %></p>
         </div>
     </div>
     <div class='board-game-image-container'>

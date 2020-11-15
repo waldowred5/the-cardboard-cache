@@ -8,15 +8,15 @@
     flex-flow: column wrap;
 }
 
-.tiles-container {
+.wished-owned-tiles-container {
     @include flex-row;
-    .wished-game-tile {
+    .wished-owned-game-tile {
         display: flex;
         flex-direction: column;
         background-color: lightgray;
         width: 25vw;
         height: 25vw;
-        .wished-game-name {
+        .wished-owned-game-name {
             text-align: center;
         }
         a {
@@ -26,7 +26,7 @@
                 object-fit: cover;
             }
         }
-        .wished-game-buttons {
+        .wished-owned-game-buttons {
             @include flex-column;
             justify-content: space-around;
             align-items: center;

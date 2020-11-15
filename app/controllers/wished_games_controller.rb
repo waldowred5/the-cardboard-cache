@@ -27,19 +27,7 @@ class WishedGamesController < ApplicationController
     selected_board_game = BoardGame.find(params[:id])
     current_user.wishlist_items << selected_board_game
 
-    puts current_user.wishlist_item_ids
-
     redirect_to wished_games_path
-
-  #   respond_to do |format|
-  #     if @wished_game.save
-  #       format.html { redirect_to @wished_game, notice: 'Wished game was successfully created.' }
-  #       format.json { render :show, status: :created, location: @wished_game }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @wished_game.errors, status: :unprocessable_entity }
-  #     end
-  #   end
   end
 
   # PATCH/PUT /wished_games/1
