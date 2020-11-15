@@ -17,6 +17,11 @@
         justify-content: center;
     }
     .board-game-info {
+        max-width: 40vw;
+        .board-game-show-name {
+            display: flex;
+            word-wrap: break-word;
+        }
         .board-game-play-stats {
             @include flex-column;
         }

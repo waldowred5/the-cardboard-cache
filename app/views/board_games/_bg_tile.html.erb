@@ -14,8 +14,8 @@
                         <h3>Rating</h3>
                     </div>
                     <div class='board-game-buttons'>
-                        <%= link_to 'Add to Wishlist', wished_games_path %>
-                        <%= link_to 'Add to Collection', owned_games_path %>
+                        <%= link_to 'Add to Wishlist', create_wished_game_path(board_game), method: :post %>
+                        <%= link_to 'Add to Collection', create_owned_game_path(board_game), method: :post %>
                     </div>
                 </div>
             </div>
