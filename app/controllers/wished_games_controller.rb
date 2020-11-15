@@ -49,7 +49,7 @@ class WishedGamesController < ApplicationController
   def destroy
     @wished_game.destroy
     respond_to do |format|
-      format.html { redirect_to wished_games_url, notice: 'Wished game was successfully destroyed.' }
+      format.html { redirect_to wished_games_url, notice: 'Wished game was successfully removed.' }
       format.json { head :no_content }
     end
   end

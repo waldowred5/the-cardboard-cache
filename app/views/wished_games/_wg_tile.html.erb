@@ -6,7 +6,7 @@
             </div>
             <%= link_to image_tag(wished_game.board_game.image, class: "card-image", alt: "#{wished_game.board_game.name} Front Cover"), wished_game.board_game %>
             <div class='wished-owned-game-buttons'>
-                <%= link_to 'Remove from Wishlist *Fix*', wished_games_path %>
+                <%= link_to 'Remove from Wishlist', destroy_wished_game_path(wished_game), method: :delete %>
                 <%= link_to 'Move to Collection *Fix*', owned_games_path %>
             </div>
         </div>
