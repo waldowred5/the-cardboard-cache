@@ -1,1 +1,6 @@
-<%= render 'og_tile' %>
+<h1>My Collection</h1>
+<% if @owned_games.empty? %>
+    <p>You have no games in your collection</p>
+<% else %>
+    <%= render 'og_tile' %>
+<% end %>

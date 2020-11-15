@@ -4,7 +4,7 @@ class OwnedGamesController < ApplicationController
   # GET /owned_games
   # GET /owned_games.json
   def index
-    @owned_games = OwnedGame.all
+    @owned_games = current_user.owned_games
   end
 
   # GET /owned_games/1
@@ -24,17 +24,10 @@ class OwnedGamesController < ApplicationController
   # POST /owned_games
   # POST /owned_games.json
   def create
-    @owned_game = OwnedGame.new(owned_game_params)
+    selected_board_game = BoardGame.find(params[:id])
+    current_user.collection_items << selected_board_game
 
-    respond_to do |format|
-      if @owned_game.save
-        format.html { redirect_to @owned_game, notice: 'Owned game was successfully created.' }
-        format.json { render :show, status: :created, location: @owned_game }
-      else
-        format.html { render :new }
-        format.json { render json: @owned_game.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to owned_games_path
   end
 
   # PATCH/PUT /owned_games/1
