@@ -25,6 +25,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 # Use CSS framework
 gem 'bootstrap'
+gem 'jquery-rails'
 
 # APIs
 # Board Game Geek

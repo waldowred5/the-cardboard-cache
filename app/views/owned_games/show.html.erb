@@ -1,4 +1,19 @@
-<p id="notice"><%= notice %></p>
+<h1>My Copy Of:</h1>
+<h2><%= @owned_game.board_game.name %></h2>
 
-<%= link_to 'Edit', edit_owned_game_path(@owned_game) %> |
-<%= link_to 'Back', owned_games_path %>
+<div class="owned-game-show-labels">
+    <h3>Condition:</h3>
+    <h3>Trade Status:</h3>
+    <h3>Price:</h3>
+</div>
+<div class="owned-game-show-values">
+    <%= @owned_game.condition %>
+    <%= @owned_game.trade_status %>
+    <%= @owned_game.price %>
+</div>
+<div class="owned-game-show-photo-buttons">
+    <%= link_to 'View Photos *Fix*', owned_game_path(@owned_game) %>
+    <%= link_to 'Upload Photos *Fix*', owned_game_path(@owned_game) %>
+</div>
+
+<%= link_to 'Edit', edit_owned_game_path(@owned_game) %>

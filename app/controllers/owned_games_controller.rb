@@ -49,7 +49,7 @@ class OwnedGamesController < ApplicationController
   def destroy
     @owned_game.destroy
     respond_to do |format|
-      format.html { redirect_to owned_games_url, notice: 'Owned game was successfully destroyed.' }
+      format.html { redirect_to owned_games_url, notice: 'Owned game was successfully removed.' }
       format.json { head :no_content }
     end
   end
@@ -62,6 +62,6 @@ class OwnedGamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def owned_game_params
-      params.fetch(:owned_game, {})
+      params.permit(:trade_status, :condition, :price)
     end
 end
