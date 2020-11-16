@@ -4,7 +4,12 @@ class TradesController < ApplicationController
   # GET /trades
   # GET /trades.json
   def index
-    @trades = Trade.all
+    # WishedGames.scope
+    # OwnedGames.scope
+
+    # collection =  current_user.owned_games
+    # wishlist_collection_games = all not_current_user.wished_games 
+    # Show board_games where each collection_item == wishlist_item && current_user != wished_game.user
   end
 
   # GET /trades/1

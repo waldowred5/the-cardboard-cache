@@ -62,6 +62,6 @@ class OwnedGamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def owned_game_params
-      params.permit(:trade_status, :condition, :price)
+      params.require(:owned_game).permit(:trade_status, :condition, :price)
     end
 end
