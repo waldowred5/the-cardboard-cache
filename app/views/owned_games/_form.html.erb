@@ -13,12 +13,12 @@
 
   <div class="actions">
     <%= form_with(model: owned_game, local: true) do |f| %>
-      <%= label_tag(:condition, "Condition:") %>
-      <%= select_tag(:condition, options_for_select([['New', 0], ['Like New', 1], ['Used', 2]])) %>    
-      <%= label_tag(:trade_status, "Trade Status:") %>
-      <%= select_tag(:trade_status, options_for_select([['Tradeable', 0], ['Not For Trade', 1]])) %>
-      <%= label_tag(:price, "Price:") %>
-      <%= number_field(:price, :price, in: 0.0..2000.0, step: 0.01) %>
+      <%= f.label(:condition, "Condition:") %>
+      <%= f.select :condition, :Condition => OwnedGame.conditions.keys.to_a %>
+      <%= f.label(:trade_status, "Trade Status:") %>
+      <%= f.select :trade_status, :'Trade Status' => OwnedGame.trade_statuses.keys.to_a %>
+      <%= f.label(:price, "Price:") %>
+      <%= f.number_field :price, in: 0.0..2000.0, step: 0.01 %>
       <%= f.submit %>
     <% end %>
   </div>

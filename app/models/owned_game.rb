@@ -3,6 +3,9 @@ class OwnedGame < ApplicationRecord
     belongs_to :board_game
     has_many :images
 
-    # enum trade_status: {tradeable: 0, not_for_trade: 1}
-    # enum condition: {new: 0, like_new: 1, used: 2}
+    enum trade_status: [:Tradeable, :'Not For Trade']
+    enum condition: [:'Brand New', :'Like New', :Used]
+
+    # scope :name, -> { keyword(attribute: :value) }
+    # scope :current_collection, -> { where(current_user.owned_games)}
 end
