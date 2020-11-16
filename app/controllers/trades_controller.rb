@@ -4,12 +4,29 @@ class TradesController < ApplicationController
   # GET /trades
   # GET /trades.json
   def index
-    # WishedGames.scope
-    # OwnedGames.scope
+    @current_user_collection_items = current_user.collection_items.inject([]) do |acc, owned_item|
+      acc << { game: owned_item, user: current_user.id } 
+    end
 
-    # collection =  current_user.owned_games
-    # wishlist_collection_games = all not_current_user.wished_games 
-    # Show board_games where each collection_item == wishlist_item && current_user != wished_game.user
+    @other_user_wishlist_items = User.other_users(current_user).map do |user|
+      user.wishlist_items.inject([]) {|acc, wished_item| acc << { game: wished_item, user: user.id } }
+    end
+
+    @current_game_trade = []
+
+    @current_user_collection_items.each do |collection_item|
+      @other_user_wishlist_items[0].each do |wishlist_item|
+        if collection_item[:game] == wishlist_item[:game]
+          @current_game_trade << {
+            collection_game_id: collection_item[:game][:id], 
+            trader_id: collection_item[:user],
+            wishlister_id: wishlist_item[:user]
+          }
+        end
+      end
+    end
+
+    @trades = @current_game_trade
   end
 
   # GET /trades/1

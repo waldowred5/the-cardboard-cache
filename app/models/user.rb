@@ -12,4 +12,6 @@ class User < ApplicationRecord
 
   has_many :send_requests, class_name: 'Trade', foreign_key: :requestor_id
   has_many :receive_requests, class_name: 'Trade', foreign_key: :requestee_id
+
+  scope :other_users, -> excluded_user {where.not(id: excluded_user.id)}
 end
