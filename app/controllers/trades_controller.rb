@@ -4,29 +4,91 @@ class TradesController < ApplicationController
   # GET /trades
   # GET /trades.json
   def index
+    # FIRST TRADE MATCHES
+    # Store all owned games for current user
     @current_user_collection_items = current_user.collection_items.inject([]) do |acc, owned_item|
       acc << { game: owned_item, user: current_user.id } 
     end
 
+    # Store all wished games for all other users (other users: all users excluding current user)
     @other_user_wishlist_items = User.other_users(current_user).map do |user|
-      user.wishlist_items.inject([]) {|acc, wished_item| acc << { game: wished_item, user: user.id } }
+      user.wishlist_items.inject([]) do |acc, wished_item| 
+        acc << { game: wished_item, user: user.id }
+      end
     end
 
-    @current_game_trade = []
+    # current user trade matches for each owned game
+    @current_game_trades = []
 
+    # compare current user owned games against all other users' wished games
     @current_user_collection_items.each do |collection_item|
-      @other_user_wishlist_items[0].each do |wishlist_item|
-        if collection_item[:game] == wishlist_item[:game]
-          @current_game_trade << {
-            collection_game_id: collection_item[:game][:id], 
-            trader_id: collection_item[:user],
-            wishlister_id: wishlist_item[:user]
+      @other_user_wishlist_items.each do |user|
+        user.each do |wishlist_item|
+          if collection_item[:game] == wishlist_item[:game]
+            @current_game_trades << {
+              collection_game_id: collection_item[:game][:id], 
+              trader_id: collection_item[:user],
+              wishlister_id: wishlist_item[:user]
+            }
+          end
+        end
+      end
+    end
+
+    # SECOND TRADE MATCHES
+
+    # Store users for all other users that appear in FIRST TRADE MATCHES
+    @other_trade_users = @current_game_trades.inject([]) do |acc, trade_match|
+      acc << User.find(trade_match[:wishlister_id])
+    end
+
+    # Store all owned games for other users that appear in FIRST TRADE MATCHES
+    @other_user_collection_items = @other_trade_users.map do |user|
+      user.collection_items.inject([]) do |acc, owned_item|
+        acc << { game: owned_item, user: user.id }
+      end
+    end
+
+    # Store all wished games for current user
+    @current_user_wishlist_items = current_user.wishlist_items.inject([]) do |acc, wished_item|
+      acc << { game: wished_item, user: current_user.id } 
+    end
+
+    # current user trade matches for each wished game
+    @other_game_trades = []
+
+    # compare other user owned games against current user wished games
+    @current_user_wishlist_items.each do |wishlist_item|
+      @other_user_collection_items.each do |user|
+        user.each do |collection_item|
+          if collection_item[:game] == wishlist_item[:game]
+            @other_game_trades << {
+              wishlist_game_id: wishlist_item[:game][:id], 
+              trader_id: collection_item[:user],
+              wishlister_id: wishlist_item[:user]
+            }
+          end
+        end
+      end
+    end
+
+    # Store all matches
+    @trade_matches = @current_game_trades + @other_game_trades
+
+    # Store all trades (bi-directional matches)
+    @trades = []
+
+    @current_game_trades.each do |current_trade|
+      @other_game_trades.each do |other_trade|
+        if current_trade[:trader_id] == other_trade[:wishlister_id] && current_trade[:wishlister_id] == other_trade[:trader_id]
+          @trades << {
+            current_trade: current_trade,
+            other_trade: other_trade
           }
         end
       end
     end
 
-    @trades = @current_game_trade
   end
 
   # GET /trades/1
