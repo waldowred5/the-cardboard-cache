@@ -12,8 +12,8 @@
     <%= @owned_game.price %>
 </div>
 <div class="owned-game-show-photo-buttons">
-    <%= link_to 'View Photos *Fix*', owned_game_path(@owned_game) %>
-    <%= link_to 'Upload Photos *Fix*', owned_game_path(@owned_game) %>
+    <%= button_to 'View Photos *Fix*', owned_game_path(@owned_game) %>
+    <%= button_to 'Upload Photos *Fix*', owned_game_path(@owned_game) %>
 </div>
 
 <%= link_to 'Edit', edit_owned_game_path(@owned_game) %>
