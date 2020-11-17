@@ -7,13 +7,13 @@ class TradesController < ApplicationController
     # FIRST TRADE MATCHES
     # Store all owned games for current user
     @current_user_collection_items = current_user.collection_items.inject([]) do |acc, owned_item|
-      acc << { game: owned_item, user: current_user.id } 
+      acc << { game: owned_item, user: current_user } 
     end
 
     # Store all wished games for all other users (other users: all users excluding current user)
     @other_user_wishlist_items = User.other_users(current_user).map do |user|
       user.wishlist_items.inject([]) do |acc, wished_item| 
-        acc << { game: wished_item, user: user.id }
+        acc << { game: wished_item, user: user }
       end
     end
 
@@ -26,9 +26,13 @@ class TradesController < ApplicationController
         user.each do |wishlist_item|
           if collection_item[:game] == wishlist_item[:game]
             @current_game_trades << {
-              collection_game_id: collection_item[:game][:id], 
-              trader_id: collection_item[:user],
-              wishlister_id: wishlist_item[:user]
+              collection_game_id: collection_item[:game][:id],
+              collection_game_name: collection_item[:game][:name],
+              collection_game_image: collection_item[:game][:image], 
+              trader_id: collection_item[:user][:id],
+              trader_email: collection_item[:user][:email],
+              wishlister_id: wishlist_item[:user][:id],
+              wishlister_email: wishlist_item[:user][:email]
             }
           end
         end
@@ -45,13 +49,13 @@ class TradesController < ApplicationController
     # Store all owned games for other users that appear in FIRST TRADE MATCHES
     @other_user_collection_items = @other_trade_users.map do |user|
       user.collection_items.inject([]) do |acc, owned_item|
-        acc << { game: owned_item, user: user.id }
+        acc << { game: owned_item, user: user }
       end
     end
 
     # Store all wished games for current user
     @current_user_wishlist_items = current_user.wishlist_items.inject([]) do |acc, wished_item|
-      acc << { game: wished_item, user: current_user.id } 
+      acc << { game: wished_item, user: current_user } 
     end
 
     # current user trade matches for each wished game
@@ -63,9 +67,13 @@ class TradesController < ApplicationController
         user.each do |collection_item|
           if collection_item[:game] == wishlist_item[:game]
             @other_game_trades << {
-              wishlist_game_id: wishlist_item[:game][:id], 
-              trader_id: collection_item[:user],
-              wishlister_id: wishlist_item[:user]
+              wishlist_game_id: wishlist_item[:game][:id],
+              wishlist_game_name: wishlist_item[:game][:name],
+              wishlist_game_image: wishlist_item[:game][:image], 
+              trader_id: collection_item[:user][:id],
+              trader_email: collection_item[:user][:email],
+              wishlister_id: wishlist_item[:user][:id],
+              wishlister_email: wishlist_item[:user][:email]
             }
           end
         end

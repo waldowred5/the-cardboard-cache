@@ -1,0 +1,97 @@
+@mixin flex-row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+@mixin trade-card-image {
+    width: 25vw;
+    height: 25vw;
+    object-fit: cover;
+}
+
+.trade-tiles-container {
+    @include flex-column;
+    width: 100vw;
+    .trade-tile {
+        @include flex-row;
+        justify-content: space-between;
+        .current-trade-container {
+            @include flex-row;
+            .current-trade-game-details {
+                width: 25vw;
+                .trade-current-game-name {
+                    h2 { text-align: center; }
+                }
+                .trade-current-game-image {
+                    .current-game-image { @include trade-card-image; }
+                } 
+            } 
+            .current-trade-user-details {
+                @include flex-row;
+                align-items: center;
+                padding-left: 5vw;
+                .trade-current-user {
+                    p { text-align: center; }
+                }
+            }       
+        }
+        .trade-buttons-container {
+            @include flex-row;
+            align-items: center;
+        }
+        .other-trade-container {
+            @include flex-row;
+            .other-trade-user-details {
+                @include flex-row;
+                align-items: center;
+                padding-right: 5vw;
+                .trade-other-user {
+                
+                }
+            }
+            .other-trade-game-details {
+                width: 25vw;
+                .trade-other-game-name {
+                    h2 { text-align: center; }
+                }
+                .trade-other-game-image {
+                    .other-game-image { @include trade-card-image; }
+                } 
+            }        
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+// display: flex;
+// flex-direction: column;
+// background-color: lightgray;
+// width: 25vw;
+// height: 40vw;
+// .wished-owned-game-name {
+//     text-align: center;
+//     font-size: 0.75vw;
+// }
+// a {
+//     .card-image {
+//         width: 25vw;
+//         height: 25vw;
+//         object-fit: cover;
+//     }
+// }
+// .wished-owned-game-buttons {
+//     @include flex-column;
+//     justify-content: space-around;
+//     align-items: center;
