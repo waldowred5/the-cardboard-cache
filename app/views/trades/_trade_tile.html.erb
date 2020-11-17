@@ -1,0 +1,40 @@
+<div class='trade-tiles-container'>
+    <% @trades.each do |trade| %>
+        <div class='trade-tile'>
+            <div class='current-trade-container'>
+                <div class='current-trade-game-details'>
+                    <div class='trade-current-game-name'>
+                        <h2><%= trade[:current_trade][:collection_game_name] %></h2>
+                    </div>
+                    <div class='trade-current-game-image'>
+                        <%= image_tag(trade[:current_trade][:collection_game_image], class: "current-game-image", alt: "#{trade[:current_trade][:collection_game_name]} Front Cover") %>
+                    </div>
+                </div>
+                <div class='current-trade-user-details'>
+                    <div class='trade-current-user'>
+                        <p><%= trade[:current_trade][:trader_email] %></p>
+                    </div>
+                </div>
+            </div>
+            <div class='trade-buttons-container'>
+                <%# create_trade_path(trade), method: :post %>
+                <%= button_to 'Request Trade', root_path %>
+            </div>
+            <div class='other-trade-container'>
+                <div class='other-trade-user-details'>
+                    <div class='trade-other-user'>
+                        <p><%= trade[:other_trade][:trader_email] %></p>
+                    </div>
+                </div>
+                <div class='other-trade-game-details'>
+                    <div class='trade-other-game-name'>
+                        <h2><%= trade[:other_trade][:wishlist_game_name] %></h2>
+                    </div>
+                    <div class='trade-other-game-image'>
+                        <%= image_tag(trade[:other_trade][:wishlist_game_image], class: "other-game-image", alt: "#{trade[:other_trade][:wishlist_game_name]} Front Cover") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>

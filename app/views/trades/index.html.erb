@@ -1,25 +1,20 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Trades</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @trades.each do |trade| %>
-      <tr>
-        <td><%= link_to 'Show', trade %></td>
-        <td><%= link_to 'Edit', edit_trade_path(trade) %></td>
-        <td><%= link_to 'Destroy', trade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1>FIRST TRADE MATCHES</h1>
+<h2>current_user_collection_items<%= pp @current_user_collection_items %></h2>
+<h2>other_user_wishlist_items<%= pp @other_user_wishlist_items %></h2>
 <br>
+<h2>current_game_trades<%= pp @current_game_trades %></h2>
+<br>
+<h1>SECOND TRADE MATCHES</h1>
+<h2>other_trade_users<%= pp @other_trade_users %></h2>
+<h2>other_user_collection_items<%= pp @other_user_collection_items %></h2>
+<h2>current_user_wishlist_items<%= pp @current_user_wishlist_items %></h2>
+<br>
+<h2>other_game_trades<%= pp @other_game_trades %></h2>
+<br>
+<h2>trade_matches<%= pp @trade_matches %></h2>
+<br>
+<h2>trades<%= pp @trades %></h2>
 
-<%= link_to 'New Trade', new_trade_path %>
+<%= render 'trade_tile' %>
