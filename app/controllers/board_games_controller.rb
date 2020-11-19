@@ -4,6 +4,7 @@ class BoardGamesController < ApplicationController
   # GET /board_games
   # GET /board_games.json
   def index
+    # Using the .ordered_by_rank scope (found on the board_game model), SQL search is automatically contained in a single query
     @board_games = BoardGame.all.ordered_by_rank
   end
 

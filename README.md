@@ -89,12 +89,6 @@ A key strategy for this approach would be to focus on board game trades between 
 
 <br>
 
-### **R13 - Wireframes:**
-
-- <a href="docs/wireframes/the-cardboard-cache-wireframes.pdf">Wireframes (PDF)</a>
-
-<br>
-
 ### **R12 - User Stories:**
 - Users should be able to create an account that is password protected where they can save data about their board game preferences
 - Users should be able to save games they own to a collection, and set the status of their owned games they are willing to trade as well as the condition of the game and the trade value (price) they are willing to trade their game for
@@ -108,7 +102,15 @@ A key strategy for this approach would be to focus on board game trades between 
 
 <br>
 
+### **R13 - Wireframes:**
+
+- <a href="docs/wireframes/the-cardboard-cache-wireframes.pdf">Wireframes (PDF)</a>
+
+<br>
+
 ### **R14 - ERD:**
+
+- Below is the Entity Relationship Diagram (ERD) for TCC:
 
 <img src="docs/erd/cardboard-cache-erd.png" alt="The Cardboard Cache ERD">
 
@@ -193,8 +195,10 @@ A key strategy for this approach would be to focus on board game trades between 
     - On-demand public cloud computing services. TCC uses the following AWS services:
         - Simple Storage Service (S3): Simple object storage, used by TCC for storing user uploaded images
     - Identity and Access Management (IAM): A solution allowing programmatic access to AWS services, used by TCC to manage individual user access to S3 storage
+- **PostgreSQL:**
+    - An open-source relational SQL database 
 - **Gems:**
-    - Devise: A gem for athenticating and authorising users of TCC
+    - Devise: A gem for athenticating and authorising users of TCC. Devise provides the framework for creating user accounts, including a series of methods like encrypting user passwords, email verification, password reset, remembering user session information and session timeout.
 
 <br>
 
@@ -220,25 +224,86 @@ A key strategy for this approach would be to focus on board game trades between 
 **Wished Games** | List of all board games all users wish to acquire
 **Collections** | List of all board games all users own
 **Trades** | A list of all board game trade matches between wishlists and collections from different users 
-**Attachments/Blobs** | Attached pictures for users' avatar image 
+**Attachments/Blobs** | Used to store attached pictures for users' avatar image 
 
 <br>
 
-Relationships:
-- A User `has_one` Address, an Address `belongs_to` a user
-- A User `has_many` Board Games `:through` Wishlists
-- A User `has_many` Board Games `:through` Collections
-- A User `has_one` Wishlist, a Wishlist `belongs_to` a user
-- A User `has_one` Collection, a Collection `belongs_to` a user
+**Associations:**
+- Users:
+    - Outlined below are all of the associations for Users
+    - Some associations that are worth mentioning are the `has_many through:` relationships to board_games through wished_games and owned_games
+    - Setting up wishlist_items and collection_items creates INNER JOIN searches, reducing SQL to a single search automatically when searching for all board games in a wishlist or collection for a particular user
+    - Also, while not yet implemented in the first version of TCC, the `has_many` associations for Trades rename the standard user_id column to requestor_id and requestee_id so the app can separately keep track of users that are considered wishlisters and traders in a trade, as well as which user initiates the trade request and which user is required to accept the trade request
+```ruby
+class User < ApplicationRecord
+  has_one_attached :picture
+  has_one :address
+  has_many :owned_games
+  has_many :wished_games
+  has_many :wishlist_items, through: :wished_games, source: :board_game
+  has_many :collection_items, through: :owned_games, source: :board_game
+  
+  has_many :send_requests, class_name: 'Trade', foreign_key: :requestor_id
+  has_many :receive_requests, class_name: 'Trade', foreign_key: :requestee_id
+end
+```
+- Addresses:
+    - Outlined below is the associations for Addresses
+```ruby
+class Address < ApplicationRecord
+    belongs_to :user
+end
+```
+- Board Games:
+    - Outlined below are the associations for Board Games
+    - Some associations that are worth mentioning are the `has_many` requestor_trades and requestee_trades, which are necessary to map the board_game ids to the user ids in the requestor/requestee use case listed above (see Users)
+```ruby
+class BoardGame < ApplicationRecord
+    has_many :owned_games
+    has_many :wished_games
 
-- A User `has_many` Trades, a Trade
-
-
-
+    has_many :requestor_trades, class_name: 'Trade', foreign_key: :requestor_board_game_id
+    has_many :requestee_trades, class_name: 'Trade', foreign_key: :requestee_board_game_id
+end
+```
+- Owned Games:
+    - Outlined below are the associations for Owned Games
+```ruby
+class OwnedGame < ApplicationRecord
+    belongs_to :user
+    belongs_to :board_game
+end
+```
+- Wished Games:
+    - Outlined below are the associations for Wished Games
+```ruby
+class WishedGame < ApplicationRecord
+    belongs_to :user
+    belongs_to :board_game
+end
+```
+- Trades:
+    - Outlined below are the associations for Trades
+    - Some associations that are worth mentioning are the `belongs_to` associations which tie the board_game and user models together via the requestor/requestee relationship (see User and Board Game above)
+```ruby
+class Trade < ApplicationRecord
+    belongs_to :requestor, class_name: "User"
+    belongs_to :requestee, class_name: "User"
+    belongs_to :requestor_board_game, class_name: "Board_Game"
+    belongs_to :requestee_board_game, class_name: "Board_Game"
+end
+```
 
 <br>
 
 ### **R18 - Database Relations:**
+
+**Relations:**
+- There are several types of relations used in TCC:
+    - 1 to 1 (Optional): Users can optionally add a single address (coming in a future release) so a 1 to 1 relation was setup and set to optional
+    - 1 to 1 (Mandatory): Each address must be tied to a single user, so a 1 to 1 relation was setup and was required 
+
+    <img src="" alt="1-to-1 ERD Relation">
 
 <br>
 
