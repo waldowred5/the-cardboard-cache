@@ -3,17 +3,12 @@
 
 <div class="owned-game-show-labels">
     <h3>Condition:</h3>
-    <h3>Trade Status:</h3>
-    <h3>Price:</h3>
-</div>
-<div class="owned-game-show-values">
     <%= @owned_game.condition %>
+    <h3>Trade Status:</h3>
     <%= @owned_game.trade_status %>
+    <h3>Price:</h3>
     <%= @owned_game.price %>
 </div>
-<div class="owned-game-show-photo-buttons">
-    <%= button_to 'View Photos *Fix*', owned_game_path(@owned_game) %>
-    <%= button_to 'Upload Photos *Fix*', owned_game_path(@owned_game) %>
-</div>
 
-<%= link_to 'Edit', edit_owned_game_path(@owned_game) %>
+<br>
+<%= button_to 'Edit', edit_owned_game_path(@owned_game), method: :get %>

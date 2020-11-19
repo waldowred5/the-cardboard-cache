@@ -24,6 +24,7 @@ A key strategy for this approach would be to focus on board game trades between 
 <br>
 
 ### **R9 - Deployed Application:**
+- https://the-cardboard-cache.herokuapp.com/
 
 <br>
 
@@ -34,11 +35,27 @@ A key strategy for this approach would be to focus on board game trades between 
 
 ### **R11 - Overview:**
 - Purpose:
+    - The Cardboard Cache has been designed to allow local board game enthusiasts to swap games with each other. This allows users to refresh their board game collections without having to constantly purchase new games, and ensures old games get the tabletop more often
 - Functionality & Features:
+    - **User Accounts:** Users can create an account where they can save information about their board games collections and wishlists, as well as interact with other users
+    - **Top Games & the Board Game Geek (BGG) API:** Users can browse the top board game titles as found on the BGG website (currently only the top 100 games are able to be imported by the API, with any number from 30-100 games loading in based on BGG API request load, auto loading of more titles coming in a future release). Users can view each of these titles for more detailed information about the game, as well as adding the game to their collections and wishlists
+    - **Collections:** Users can save any games found on BGG (which includes a list of over 100,000 titles), to a digital collection of games they own, and set the status of those games to either a 'tradeable' game or a game 'not for trade', as well as a trade value (price) which they are willing to trade the game for
+    - **Wishlists:** Users are able to pick games from the BGG database that they wish to own
+    - **Trades:** Users can search for potential trade matches with other users. These trade matches include a succesfful trade, where User A has a game in their collection that User B has in their wishlist, and vice versa. Users can then request to trade these 2 games, which are listed as successful trades when both parties have accepted the trade (currently in Trades functionality only includes searches for successful trades, requesting/accepting trades coming in a future release)
 - Sitemap:
+
 - Screenshots:
+
 - Target Audience:
+    - The primary audience for The Cardboard Cache is anyone who is a board game enthusiast and interested in trading their older games for games that other users are willing to trade
 - Tech Stack:
+    - Frontend: HTML5 (21.1%), SCSS (5.2%), Javascript (2.8%), CSS3 (0.5%)
+    - Backend: Ruby 2.7.1 on Rails 6.0.3.4 (70.4%)
+    - Database: PostgreSQL 12.3
+    - Deployment: Heroku
+    - Project Management: Github (Git), Trello
+    - Design: Balsamiq Wireframes, Draw.io (ERD/Sitemap)
+    - 3rd Party: Board Game Geek API ([BGG XML API2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)), AWS (S3, IAM)
 
 <br>
 
