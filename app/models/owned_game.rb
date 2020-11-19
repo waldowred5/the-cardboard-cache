@@ -1,7 +1,6 @@
 class OwnedGame < ApplicationRecord
     belongs_to :user
     belongs_to :board_game
-    has_many :images
 
     enum trade_status: [:Tradeable, :'Not For Trade']
     enum condition: [:'Brand New', :'Like New', :Used]
