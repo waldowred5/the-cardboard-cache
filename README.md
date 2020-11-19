@@ -300,10 +300,31 @@ end
 
 **Relations:**
 - There are several types of relations used in TCC:
+- **1 to 1:**
     - 1 to 1 (Optional): Users can optionally add a single address (coming in a future release) so a 1 to 1 relation was setup and set to optional
     - 1 to 1 (Mandatory): Each address must be tied to a single user, so a 1 to 1 relation was setup and was required 
 
-    <img src="" alt="1-to-1 ERD Relation">
+    <img src="docs/dbrelations/1to1.png" alt="1-to-1 ERD Relation">
+
+<br>
+
+- **1 to Many:**
+    - 1 to Many (Optional): Users can optionally have many wished_games, owned_games and trades
+    - Many to 1 (Mandatory): Each owned_game and wished_game must always belong to only one user. Additionally, each trade must only have one requestor and one requestee so they each have a many to 1 mandatory relation
+
+    <img src="docs/dbrelations/1tomanyusers.png" alt="1-to-1 ERD Relation">
+
+    - 1 to Many (Optional): Similarly to users, board_games can optionally be included in many wished_games, owned_games and trades
+    - Many to 1 (Mandatory): Each owned_game and wished_game must always belong to only one board_game. Additionally, each trade must only have one requestor_board_game and one requestee_board_game so they each have a many to 1 mandatory relation
+
+    <img src="docs/dbrelations/1tomanyboardgames.png" alt="1-to-1 ERD Relation">
+
+<br>
+
+- **Many to Many:**
+    - Many to Many (Optional): By extension of the relationships between users, wished_games, owned_games and trades as well as the relationships between board_games, owned_games, wished_games and trades, the ultimate relationship between users and board_games becomes a many to many relationship, joined by the wished_games, owned_games and trades tables
+
+    <img src="docs/dbrelations/manytomany.png" alt="1-to-1 ERD Relation">
 
 <br>
 
