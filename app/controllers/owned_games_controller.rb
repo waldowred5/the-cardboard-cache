@@ -4,7 +4,8 @@ class OwnedGamesController < ApplicationController
   # GET /owned_games
   # GET /owned_games.json
   def index
-    @owned_games = current_user.owned_games
+    # Using .includes(:board_game) reduces SQL to a single query instead of a separate query per instance of owned_games
+    @owned_games = current_user.owned_games.includes(:board_game)
   end
 
   # GET /owned_games/1

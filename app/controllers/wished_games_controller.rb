@@ -4,7 +4,8 @@ class WishedGamesController < ApplicationController
   # GET /wished_games
   # GET /wished_games.json
   def index
-    @wished_games = current_user.wished_games
+    # Using .includes(:board_game) reduces SQL to a single query instead of a separate query per instance of wished_games
+    @wished_games = current_user.wished_games.includes(:board_game)
   end
 
   # GET /wished_games/1

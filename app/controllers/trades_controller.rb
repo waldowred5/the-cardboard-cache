@@ -41,7 +41,7 @@ class TradesController < ApplicationController
 
     # SECOND TRADE MATCHES
 
-    # Store users for all other users that appear in FIRST TRADE MATCHES
+    # Store users for all other users that appear in FIRST TRADE MATCHES to avoid searching for ALL other users again
     @other_trade_users = @current_game_trades.inject([]) do |acc, trade_match|
       acc << User.find(trade_match[:wishlister_id])
     end
